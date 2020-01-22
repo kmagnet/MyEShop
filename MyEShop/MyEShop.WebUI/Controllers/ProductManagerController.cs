@@ -4,21 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyEShop.Core.Models;
+using MyEShop.Core.ViewModels;
 using MyEShop.DataAccess.InMemory;
-
-
 
 namespace MyEShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
         ProductContainer context;
+        CategoryContainer categories;
 
         public ProductManagerController()
-        { // Product Manager Controller constructor to initialize
-          // the product container
+        { 
+            // Product Manager Controller constructor to initialize
+            // the product container and category container 
 
             context = new ProductContainer();
+            categories = new CategoryContainer();
         }
 
         // GET: ProductManager
@@ -29,14 +31,19 @@ namespace MyEShop.WebUI.Controllers
         }
 
         public ActionResult CreateProduct()
-        { // This is for the page where user enters the details of the product
-            Product product = new Product();
-            return View(product);
+        { 
+            // This is for the page where user enters the details of the product
+
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            viewModel.Product = new Product();
+            viewModel.Categories = categories.Container(); // Pulls the list of categories from database to appear on view as dropdown list
+            return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult CreateProduct(Product product)
-        { // This is where the details of the product are posted into storage
+        { 
+            // This is where the details of the product are posted into storage
 
             if (!ModelState.IsValid) // This ensures all the data entered into the model is correct 
             {                        // otherwise we need to return to the page and show validation
@@ -63,7 +70,11 @@ namespace MyEShop.WebUI.Controllers
             }
             else
             {
-                return View(product); // Return to view the product that we have found
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.Categories = categories.Container();
+
+                return View(viewModel); // Return to view the product that we have found
             }
         }
 

@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductManagerController.cs" />
@@ -240,6 +241,10 @@
     <Content Include="Views\ProductManager\EditProduct.cshtml" />
     <Content Include="Views\ProductManager\DeleteProduct.cshtml" />
     <Content Include="Views\ProductManager\CreateProduct.cshtml" />
+    <Content Include="Views\CategoryManager\Index.cshtml" />
+    <Content Include="Views\CategoryManager\CreateCategory.cshtml" />
+    <Content Include="Views\CategoryManager\EditCategory.cshtml" />
+    <Content Include="Views\CategoryManager\DeleteCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
