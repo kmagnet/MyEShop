@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace MyEShop.Core.Models
 {
-    public class Product
+    public class Product : BaseClass
     {
-        public string Id { get; set; }
+        // Product class inherits from BaseClass the Id attribute and constructor
+
         [StringLength(20)] // Model validation using ComponentModel and DataAnnotations namespaces to limit product name to max of 20 characters
         [DisplayName("Product Name")] // Controls how this property will be rendered on the View
         public string Name { get; set; }
@@ -19,9 +20,6 @@ namespace MyEShop.Core.Models
         public decimal Price { get; set; }
         public string Category { get; set; }
         public string Image { get; set; }
-
-        public Product() {
-            this.Id = Guid.NewGuid().ToString();
-        }
+                
     }
 }

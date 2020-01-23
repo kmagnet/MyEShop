@@ -11,16 +11,16 @@ namespace MyEShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductContainer context;
-        CategoryContainer categories;
+        InMemoryContainer<Product> context;
+        InMemoryContainer<Category> categories;
 
         public ProductManagerController()
         { 
             // Product Manager Controller constructor to initialize
             // the product container and category container 
 
-            context = new ProductContainer();
-            categories = new CategoryContainer();
+            context = new InMemoryContainer<Product>();
+            categories = new InMemoryContainer<Category>();
         }
 
         // GET: ProductManager

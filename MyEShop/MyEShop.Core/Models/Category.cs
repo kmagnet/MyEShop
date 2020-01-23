@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace MyEShop.Core.Models
 {
-    public class Category // This is the model for the product category
+    public class Category : BaseClass 
     {
-        public string Id { get; set; }
+        // This is the model for the product category which
+        // inherits the Id attribute from BaseClass along with the constructor
+                
         public string CategoryName { get; set; }
-
-        public Category() { // This is the constructor for product categories
-                            // which only creates a new ID for the category upon object instantiation.
-
-            this.Id = Guid.NewGuid().ToString();
-
-        }
+               
     }
 }

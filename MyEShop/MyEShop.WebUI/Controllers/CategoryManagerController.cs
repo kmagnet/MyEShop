@@ -10,13 +10,13 @@ namespace MyEShop.WebUI.Controllers
 {
     public class CategoryManagerController : Controller
     {
-        CategoryContainer context;
+        InMemoryContainer<Category> context;
 
         public CategoryManagerController()
         { // Category Manager Controller constructor to initialize
           // the category container
 
-            context = new CategoryContainer();
+            context = new InMemoryContainer<Category>();
         }
 
         // GET: CategoryManager
