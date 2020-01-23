@@ -1,6 +1,7 @@
 using MyEShop.Core.Contracts;
 using MyEShop.Core.Models;
 using MyEShop.DataAccess.InMemory;
+using MyEShop.DataAccess.SQL;
 using System;
 
 using Unity;
@@ -52,8 +53,8 @@ namespace MyEShop.WebUI
             /// where we tell the container what type of interface to register then
             /// tell it what implementation we want to use.
             
-            container.RegisterType<IContainer<Product>, InMemoryContainer<Product>>();
-            container.RegisterType<IContainer<Category>, InMemoryContainer<Category>>();
+            container.RegisterType<IContainer<Product>, SQLContainer<Product>>();
+            container.RegisterType<IContainer<Category>, SQLContainer<Category>>();
         }
     }
 }
