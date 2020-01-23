@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IContainer.cs" />
     <Compile Include="Models\BaseClass.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />

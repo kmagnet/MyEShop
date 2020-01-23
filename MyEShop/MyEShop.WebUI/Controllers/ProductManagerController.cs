@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyEShop.Core.Contracts;
 using MyEShop.Core.Models;
 using MyEShop.Core.ViewModels;
 using MyEShop.DataAccess.InMemory;
@@ -11,16 +12,17 @@ namespace MyEShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        InMemoryContainer<Product> context;
-        InMemoryContainer<Category> categories;
+        IContainer<Product> context;
+        IContainer<Category> categories;
 
-        public ProductManagerController()
+        public ProductManagerController(IContainer<Product> productContext, IContainer<Category> categoryContext)
         { 
             // Product Manager Controller constructor to initialize
-            // the product container and category container 
+            // concrete implementation of product container and category IContainers 
+            // then stores them into their respective context variables
 
-            context = new InMemoryContainer<Product>();
-            categories = new InMemoryContainer<Category>();
+            context = productContext;
+            categories = categoryContext;
         }
 
         // GET: ProductManager
