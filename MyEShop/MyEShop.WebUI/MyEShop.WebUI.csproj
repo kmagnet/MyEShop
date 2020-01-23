@@ -265,6 +265,7 @@
     <Content Include="Views\CategoryManager\CreateCategory.cshtml" />
     <Content Include="Views\CategoryManager\EditCategory.cshtml" />
     <Content Include="Views\CategoryManager\DeleteCategory.cshtml" />
+    <Content Include="Views\Home\ViewProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
