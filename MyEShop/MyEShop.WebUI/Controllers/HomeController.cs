@@ -1,5 +1,6 @@
 ﻿using MyEShop.Core.Contracts;
 using MyEShop.Core.Models;
+using MyEShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,30 @@ namespace MyEShop.WebUI.Controllers
             categories = categoryContext;
         }
 
-        public ActionResult Index()
-        {
+        public ActionResult Index(string Category=null)
+        {   
+            /// This index method accepts an optional parameter
+            /// where you can have a null item parameter passed or
+            /// if you don't pass any parameters then it is assumed null
+            
             List<Product> products = context.Container().ToList();
-            return View(products);
+            List<Category> categories = this.categories.Container().ToList();
+
+            /// if Category is found to be null then we just return the product list
+            /// as it is otherwise we will return a filtered product list
+            if (Category == null)
+            {
+                products = context.Container().ToList();
+            }
+            else {
+                products = context.Container().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.Categories = categories;
+            
+            return View(model);
         }
 
         public ActionResult ViewProductDetails(string Id) {
