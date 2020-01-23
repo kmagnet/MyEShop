@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -43,7 +44,7 @@ namespace MyEShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateProduct(Product product)
+        public ActionResult CreateProduct(Product product, HttpPostedFileBase file)
         { 
             // This is where the details of the product are posted into storage
 
@@ -54,6 +55,18 @@ namespace MyEShop.WebUI.Controllers
             }
             else
             {
+                if (file != null) {
+                    /// Validates if image file exists
+                    /// and if so then saves the image using its
+                    /// product ID because chances are user may upload 
+                    /// images of the same filename so this ensures that 
+                    /// we always name our file with a unique filename
+                    
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image); // Saves the file in that folder context/productimages with the
+                                                                                               // resulting filename string stored in product.Image
+                }                
+
                 context.Insert(product); // Insert the product in the product container
                 context.Confirm(); // conrfirms the insertion of product into the memory
 
@@ -81,7 +94,7 @@ namespace MyEShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProduct(Product product, string Id)
+        public ActionResult EditProduct(Product product, string Id, HttpPostedFileBase file)
         { // This is where the actual revision occurs
 
             Product productToEdit = context.Search(Id);
@@ -99,10 +112,22 @@ namespace MyEShop.WebUI.Controllers
                                           // user can correct the revision errors
                 }
 
+                if (file != null)
+                {
+                    /// Validates if image file exists
+                    /// and if so then saves the image using its
+                    /// product ID because chances are user may upload 
+                    /// images of the same filename so this ensures that 
+                    /// we always name our file with a unique filename
+
+                    productToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image); // Saves the file in that folder context/productimages with the
+                                                                                               // resulting filename string stored in product.Image
+                }
+
                 productToEdit.Category = product.Category; // Push the revisions into the product to be updated from the list
                 productToEdit.Description = product.Description;
-                productToEdit.Name = product.Name;
-                productToEdit.Image = product.Image;
+                productToEdit.Name = product.Name;                
                 productToEdit.Price = product.Price;
 
                 context.Confirm(); // Push all the changes into the stored products list in the cache
